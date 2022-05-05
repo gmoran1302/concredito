@@ -53,27 +53,25 @@
 
         <div>
 <strong>Estatus</strong>
+
 @php($status = ['Enviado','Autorizado','Rechazado'])
-<select name="estatus" class="form-control">
+<select id="estatus" name="estatus" class="form-control">
 <option class="hidden"  disabled >Status</option>
 @foreach($status as $sta)
-<option @if($prospecto -> estatus == $sta ) 
-selected
-    @endif
-</option>{{$sta}}</option>
+<option @if($prospecto -> estatus == $sta ) selected @endif value="{{$sta}}">{{$sta}}</option>
 @endforeach
 </select>
 
 </div>
-<div>
-@if ( $status == 'Rechazado' )
-        <div class="form-group">
-            <strong>Observaciones</strong>
-            {{ Form::textarea('obse', $prospecto->obse, ['class' => 'form-control' . ($errors->has('obse') ? ' is-invalid' : ''), 'placeholder' => 'Observacion']) }}
-            {!! $errors->first('obse', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        @endif
-</div> 
+
+
+    <div class="form-group" id="target">
+        <strong>Observaciones</strong>
+        {{ Form::textarea('obse', $prospecto->obse, ['class' => 'form-control' . ($errors->has('obse') ? ' is-invalid' : ''), 'placeholder' => 'Observacion']) }}
+        {!! $errors->first('obse', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+
+
 
     </div>
             </div>
@@ -117,3 +115,21 @@ selected
       <button type="submit" class="btn btn-success"> Enviar</button>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    var valorEstado = $('#estatus').val();
+    if(valorEstado === "Rechazado"){
+        $('#target').show();
+    } else {
+        $('#target').hide();
+    }
+
+    $('#estatus').on('change', function () {
+        var valorEstatus = this.value;
+        if(valorEstatus == 'Rechazado'){
+            $('#target').show();
+        }          
+    })
+});
+</script>
