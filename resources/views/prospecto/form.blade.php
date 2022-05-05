@@ -47,7 +47,7 @@
             {!! $errors->first('rfc', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-        {{ Form::label('rfc') }}
+        {{ Form::label('Carga Documentos') }}
                 <div class="input-group hdtuto control-group lst increment" >
                     <input type="file" name="filenames[]" class="myfrm form-control">
                     <div class="input-group-btn"> 

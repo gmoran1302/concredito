@@ -53,25 +53,24 @@ class ProspectoController extends Controller
         $users = Prospecto::select('id')->orderBy('id', 'desc')->first();
         $documento = new Documento();
         $documento->id_prospecto= $users->id;
-        // $data = [];
+        $data = [];
         $image = $request->file('filenames');
         if ($image) {
-            foreach($request->file('filenames') as $file)
+            foreach($image as $file)
             {
                 $name=$file->getClientOriginalName();
-                $documento->nombre_document =$name;
-                $documento->ruta_document = $file->move(public_path().'/files/', $name);
-                $documento->url_document = $request->root().'/files/'.$name;
-                $data[] = $name;  
+                $data[] = [
+                'id_prospecto'=> $users->id,
+                'nombre_document' => $name,
+                'ruta_document' => $file->move(public_path().'/files/', $name),
+                'url_document' => $request->root().'/files/'.$name,
+                'status' => '1',
+                ];
             }
+            Documento::insert($data);
         }
-        $file= new File();
-        $documento->status = '1';
-        //$documento->filenames = $data;
-        $documento->save();
-     
-        return redirect()->route('prospectos.index')
-            ->with('success', 'Prospecto creado correctamente.');
+        // return redirect()->route('prospectos.index')
+           // ->with('success', 'Prospecto creado correctamente.');
     }
 
     /**
