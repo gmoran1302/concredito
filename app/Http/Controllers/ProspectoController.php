@@ -71,7 +71,7 @@ class ProspectoController extends Controller
         $documento->save();
      
         return redirect()->route('prospectos.index')
-            ->with('success', 'Prospecto created successfully.');
+            ->with('success', 'Prospecto creado correctamente.');
     }
 
     /**
@@ -120,7 +120,7 @@ class ProspectoController extends Controller
         $prospecto->update($request->all());
 
         return redirect()->route('prospectos.index')
-            ->with('success', 'Prospecto updated successfully');
+            ->with('success', 'Prospecto actualizado correctamente');
     }
 
     /**
@@ -133,6 +133,6 @@ class ProspectoController extends Controller
         $prospecto = Prospecto::find($id)->delete();
 
         return redirect()->route('prospectos.index')
-            ->with('success', 'Prospecto deleted successfully');
+            ->with('success', 'Prospecto eliminado correctamente');
     }
 }

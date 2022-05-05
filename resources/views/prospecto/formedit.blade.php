@@ -67,7 +67,7 @@
 
     <div class="form-group" id="target">
         <strong>Observaciones</strong>
-        {{ Form::textarea('obse', $prospecto->obse, ['class' => 'form-control' . ($errors->has('obse') ? ' is-invalid' : ''), 'placeholder' => 'Observacion']) }}
+        {{ Form::textarea('obse', $prospecto->obse, ['class' => 'form-control' . ($errors->has('obse') ? ' is-invalid' : ''), 'placeholder' => 'Observacion', 'id' => 'obse' ]) }}
         {!! $errors->first('obse', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 
@@ -129,6 +129,10 @@ $(document).ready(function () {
         var valorEstatus = this.value;
         if(valorEstatus == 'Rechazado'){
             $('#target').show();
+            $("textarea").attr('required','required');
+        } else {
+            $('#target').hide();
+            $("textarea").removeAttr('required');
         }          
     })
 });
